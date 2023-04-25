@@ -303,7 +303,7 @@ console.log($('tbody input[type="checkbox"]'));
     $('#addmusic').click(function(){
         event.preventDefault();
          $.ajax({ 
-            url:'http://mp3.zzgoodqc.cn/api/songs',
+            url:'https://mp3.zzgoodqc.cn/api/songs',
            method: "post",
            dataType: "json",
            headers: {'Content-Type': 'application/json'},
@@ -360,7 +360,7 @@ $('#addmusic1').click(function(){
     console.log(bianliang);
     event.preventDefault();
     $.ajax({
-        url:'http://81.68.107.245/api/songs/'+bianliang,
+        url:'https://mp3.zzgoodqc.cn/api/songs'+bianliang,
         type:'PUT',
         dataType: 'json',
         headers: {'Content-Type': 'application/json'},
@@ -392,7 +392,7 @@ $('#search button').click(function(){
     console.log(bianliang);
     event.preventDefault();
     $.ajax({
-        url:'http://81.68.107.245/api/songs/'+bianliang,
+        url:'https://mp3.zzgoodqc.cn/api/songs'+bianliang,
         type:'get',
         headers: {'Content-Type': 'application/json'},
         dataType: "json",
