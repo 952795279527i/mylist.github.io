@@ -236,7 +236,7 @@
            
            $.ajax({
             type:'get',
-            url: `http://81.68.107.245/api/songs?page=${page}&pageSize=${pageSize}`,
+            url: `http://mp3.zzgoodqc.cn/api/songs?page=${page}&pageSize=${pageSize}`,
             dataType: "json",
             // data:{
             //     page:1,
@@ -335,7 +335,7 @@ $('#tbody').on('click','button[id="compile"]',function(){
         // console.log(Urlshanchu);
     console.log(bianliang);
     $.ajax({
-        url:'http://81.68.107.245/api/songs/'+bianliang,
+        url:'http://mp3.zzgoodqc.cn/api/songs/'+bianliang,
         type:'DELETE',
         dataType: 'json',
         success: function (data) {
@@ -360,7 +360,7 @@ $('#addmusic1').click(function(){
     console.log(bianliang);
     event.preventDefault();
     $.ajax({
-        url:'http://81.68.107.245/api/songs/'+bianliang,
+        url:'http://mp3.zzgoodqc.cn/api/songs/'+bianliang,
         type:'PUT',
         dataType: 'json',
         headers: {'Content-Type': 'application/json'},
@@ -392,7 +392,7 @@ $('#search button').click(function(){
     console.log(bianliang);
     event.preventDefault();
     $.ajax({
-        url:'http://81.68.107.245/api/songs/'+bianliang,
+        url:'http://mp3.zzgoodqc.cn/api/songs/'+bianliang,
         type:'get',
         headers: {'Content-Type': 'application/json'},
         dataType: "json",
