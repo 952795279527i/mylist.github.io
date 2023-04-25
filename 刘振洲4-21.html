@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+     <link rel="stylesheet" href="//unpkg.com/layui@2.6.8/dist/css/layui.css">
+     <script src="//unpkg.com/layui@2.6.8/dist/layui.js"></script>
+     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.js"></script>
+    <style>
+      table {
+        width: 1600px;
+        border-collapse: collapse;
+      }
+      .table{
+        z-index: 999;
+        background-color:rgba(114, 112, 112, 0.1);
+        color: white;
+      }
+      th,
+      td {
+        border: 1px solid #999;
+        text-align: center;
+        height:40px;
+        padding: 0 20px;
+      }
+      thead tr th{
+       height:40px;
+      }
+      table thead tr {
+        background-color: #008c8c;
+        color: #fff;
+      }
+
+      table tbody tr:hover {
+        background-color: #ccc;
+      }
+
+      table tbody tr td:nth-child(1) {
+        color: #f40;
+      }
+
+      table tfoot tr td {
+        text-align: right;
+        padding-right: 20px;
+      }
+      #right-ul{
+        float: right;
+      }
+      #navig{
+        width: 100%;
+        height:60px;
+      }
+      #examine,
+      #compile,
+      #start 
+      {
+        width: 45px;
+        height: 25px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 12px;
+      }
+      
+      #examine,
+      #compile {
+        background-color: rgb(107, 205, 241);
+        color: white;
+      }
+      #start {
+        background-color: rgba(242, 189, 75, 0.769);
+        color: white;
+      }
+      #tianObj,#tianObj2{
+        background-color: rgba(11, 135, 102, 0.769);
+        width: 350px;height: 280px;
+        display: none;
+        position: absolute;
+        top:40px;
+        left:30%;
+      }
+      #tianObj span,#tianObj2 span{
+        margin-left: 20px;
+      }
+      #tianObj h2,#tianObj2 h2{
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 30px;
+        color: rgb(48, 201, 235);
+      }
+      #addsong{
+        width: 100px;
+        height: 58px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 12px;
+        color: white;
+        background-color: #008c8c;
+      }
+      #addmusic,#cancel,#addmusic1,#cancel1{
+        width: 45px;
+        height: 25px;
+        border-radius: 4px;
+        font-size: 12px;
+        margin-left: 80px;
+        color: white;
+      }
+      #addmusic,#addmusic1{
+        background-color: #f40;
+        border: 1px solid #f40;
+      }
+      #cancel,#cancel1{
+        background-color: green;
+        border: 1px solid green;
+      }
+      #search{
+        width: 400px;
+        height: 40px;
+        display: inline-block;
+      }
+      #search input{
+        height: 35px;
+        width: 300px;
+        border: none;
+        border-bottom: 1px solid #ccc;
+      }
+      #search button,#delbtn{
+        height: 35px;
+        width: 80px;
+        border: none;
+        background-color: #f40;
+        color: white;
+        border-bottom: 1px solid #ccc;
+      }
+      #spanList,#spanObj{
+        margin: 0 20px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="navig">
+        <button id="addsong">添加歌曲</button>
+        <div id="search">
+            <input type="text">
+            <button>搜索</button>
+        </div>
+        <button id="delbtn">批量删除</button>
+        <ul class="layui-nav" lay-filter="" id="right-ul">
+            <li class="layui-nav-item">
+              <select>
+                <option value="1">Ligth</option>
+                <option value="2">Dark</option>
+              </select>
+            </li>
+          </ul>
+    </div>
+    <table border="1">
+      <thead >
+        <tr>
+          <th>
+            <input type="checkbox">
+          </th>
+          <th>ID</th>
+          <th>歌曲名称</th>
+          <th>图片</th>
+          <th>艺术家</th>
+          <th>专辑名称</th>
+          <th>年代</th>
+          <th>类型</th>
+          <th>更新时间</th>
+          <th>创建时间</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody id="tbody">
+      </tbody>
+    </table>
+    <a href="#" id="upBtn">上一页</a>
+    <span id="spanList"></span>
+    <a href="#" id="nextBtn">下一页</a>
+    <span id="spanObj"></span>
+    <div id="tianObj">
+        <h2>添加歌曲</h2>
+        <form action="#">
+            <span>歌曲名称</span>&nbsp;&nbsp;<input type="text" id="songname"><br><br>
+            <span>艺术家</span>&emsp;&nbsp;&nbsp;<input type="text" id="artList"><br><br>
+            <span>专辑名称</span>&nbsp;&nbsp;<input type="text"id="zhuanji"><br><br>
+            <span>年代</span>&emsp;&emsp;&nbsp;&nbsp;<input type="text" id="years"><br><br>
+            <span>类型</span>&emsp;&emsp;&nbsp;&nbsp;<input type="text" id="lei"><br><br>
+            <button id="addmusic">添加</button>
+            <button id="cancel">取消</button>
+        </form>
+    </div>
+    <div id="tianObj2">
+        <h2>更新歌曲</h2>
+        <form action="#">
+            <span>歌曲名称</span>&nbsp;&nbsp;<input type="text" id="songname1"><br><br>
+            <span>艺术家</span>&emsp;&nbsp;&nbsp;<input type="text" id="artList1"><br><br>
+            <span>专辑名称</span>&nbsp;&nbsp;<input type="text"id="zhuanji1"><br><br>
+            <span>年代</span>&emsp;&emsp;&nbsp;&nbsp;<input type="text" id="years1"><br><br>
+            <span>类型</span>&emsp;&emsp;&nbsp;&nbsp;<input type="text" id="lei1"><br><br>
+            <button id="addmusic1">更新</button>
+            <button id="cancel1">取消</button>
+        </form>
+    </div>
+    <script>
+        let co
+        let page=1;
+        let pageSize=10;
+        let bianliang
+        ;(function(){
+          
+            colours()
+            $('#nextBtn').click(function(){
+                if (page==co) {
+                    alert('到底了')
+                }else{
+                    page++
+                    colours()
+                }
+                
+            })
+            $('#upBtn').click(function(){
+                if (page<=1) {
+                    alert('没有了')
+                }else{
+                    page--
+                    colours()
+                }
+            })
+        })()
+        // 歌曲列表
+        function colours() {
+           
+           $.ajax({
+            type:'get',
+            url: `http://81.68.107.245/api/songs?page=${page}&pageSize=${pageSize}`,
+            dataType: "json",
+            // data:{
+            //     page:1,
+            //     pageSize:10,
+            // },
+          success: function (data) {
+            console.log(data.data);
+              if (data.code == "200") {
+                coloursObj(data.data);
+                $('#spanList').html('共'+data.count+'条')
+                $('#spanObj').html("共"+Math.ceil((data.count)/(data.pageSize))+'页')
+                // localStorage.setItem("minggzi", JSON.stringify(res.data));
+
+                  co = Math.ceil((data.count)/(data.pageSize))
+                  console.log(co);
+                  console.log(page);
+              } else {
+                alert(data.msg);
+              }
+        },
+        }) 
+        }
+        // 渲染页面
+        function coloursObj(data){
+            let html = '';
+            $(data).each((index,item) =>{
+                html += `
+                <tr>
+                    <td>
+                      <input type="checkbox">
+                    </td>
+                    <td name="indexId" data-id=${item.id}>${item.id}</td>
+                    <td id="title">${item.title}</td>
+                    <td id="image_url">
+                      <img src="${item.image_url}">
+                    </td>
+                    <td id="artist">${item.artist}</td>
+                    <td id="genre">${item.genre}</td>
+                    <td id="year">${item.year}</td>
+                    <td id="album">${item.album}</td>
+                    <td>${item.updated_at}</td>
+                    <td>${item.created_at}</td>
+                    <td>
+                        <button id="examine" data-id=${item.id}>查看</button>
+                        <button id="compile" data-id=${item.id}>删除</button>
+                        <button id="start">更新</button>
+                    </td>
+                </tr>
+                `
+            });
+            $("#tbody").html(html);
+console.log($('tbody input[type="checkbox"]'));
+        }
+        // 添加歌曲
+        $("#addsong").click(function () {
+      event.preventDefault();
+      $("#tianObj").css("display", "block");
+    });
+    $('#cancel').click(function(){
+        event.preventDefault();
+        
+        $("#tianObj").css("display", "none"); 
+    }) 
+    $('#addmusic').click(function(){
+        event.preventDefault();
+         $.ajax({ 
+            url:'http://mp3.zzgoodqc.cn/api/songs',
+           method: "post",
+           dataType: "json",
+           headers: {'Content-Type': 'application/json'},
+           data:JSON.stringify({
+            title : $("#songname").val(),
+            artist: $("#artList").val(),
+            genre: $("#zhuanji").val(),
+            year: $("#years").val(),
+            album: $("#lei").val(),
+           }),
+           success: function (data) {
+          if (data.code == "200") {
+            alert(data.msg)
+            ccoloursObj()
+          }else{
+            alert(data.msg);
+          }
+        },
+    })
+    $("#tianObj").css("display", "none");     
+})  
+// 删除歌曲
+$('#tbody').on('click','button[id="compile"]',function(){
+    if (confirm('确定要删除吗')) {
+        bianliang =  $(this).parent().siblings('td[name="indexId"]').data('id')
+        // const Urlshan = 'http://81.68.107.245/api/songs/{id}';
+        // console.log(bianliang);
+        // const Urlshanchu = Urlshan.replace('id', bianliang)
+        // console.log(Urlshanchu);
+    console.log(bianliang);
+    $.ajax({
+        url:'http://81.68.107.245/api/songs/'+bianliang,
+        type:'DELETE',
+        dataType: 'json',
+        success: function (data) {
+            colours()
+        }
+    })
+    }
+    
+})
+$('#tbody').on('click','button[id="start"]',function(){
+    event.preventDefault();
+   $('#tianObj2').css('display', 'block');
+   $("#songname1").val($(this).parent().siblings('td[id="title"]').html())
+   $("#artList1").val($(this).parent().siblings('td[id="artist"]').html())
+   $("#zhuanji1").val($(this).parent().siblings('td[id="album"]').html())
+   $("#years1").val($(this).parent().siblings('td[id="year"]').html())
+   $("#lei1").val($(this).parent().siblings('td[id="genre"]').html())
+   bianliang =  $(this).parent().siblings('td[name="indexId"]').data('id')
+})
+$('#addmusic1').click(function(){
+    
+    console.log(bianliang);
+    event.preventDefault();
+    $.ajax({
+        url:'http://81.68.107.245/api/songs/'+bianliang,
+        type:'PUT',
+        dataType: 'json',
+        headers: {'Content-Type': 'application/json'},
+        data:JSON.stringify({
+            id:bianliang,
+            title:$("#songname1").val(),
+            artist:$("#artList1").val(),
+            album:$("#zhuanji1").val(),
+            year:$("#years1").val(),
+            genre:$("#lei1").val()
+        }),
+        success: function (data) {
+            if (data.code == "200") {
+                  alert(data.msg)
+                  colours()
+                }else{
+                  alert(data.msg);
+                }
+        }
+    })
+    $("#tianObj2").css("display", "none");   
+})
+$('#cancel1').click(function(){
+    event.preventDefault();
+    $("#tianObj2").css("display", "none");  
+})
+$('#search button').click(function(){
+    bianliang =  $("#search input").val()
+    console.log(bianliang);
+    event.preventDefault();
+    $.ajax({
+        url:'http://81.68.107.245/api/songs/'+bianliang,
+        type:'get',
+        headers: {'Content-Type': 'application/json'},
+        dataType: "json",
+        success:function(data){
+                 coloursObj(data.data)
+             
+            }
+    })
+})
+
+$('#delbtn').click(function(){
+    event.preventDefault();
+    console.log($('#tbody tr td input').val('checked'));
+})
+    </script>
+  </body>
+</html>
