@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Swiper demo</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"
+    />
+    <!-- Link Swiper's CSS -->
+    <link
+      rel="stylesheet"
+      href="sw.min.css"
+    />
+
+    <!-- Demo styles -->
+    <style>
+      html,
+      body {
+        position: relative;
+        /* height: 100%; */
+      }
+      #p1{
+        position: absolute;
+        top: 0;
+
+    }
+      #boss{
+        width: 100%;
+        height: 800px;
+        background-color: rgb(34, 34, 34);
+        position: relative;
+      }
+      #box{
+        position: absolute;
+        /* top: 100%; */
+      }
+      body {
+        background: #eee;
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        color: #000;
+        margin: 0;
+        padding: 0;
+      }
+
+      .swiper {
+        width: 500px;
+        height: 500px;
+      }
+
+      .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+      }
+
+      body {
+        background: #000;
+        color: #000;
+      }
+
+      .swiper {
+        width: 1400px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .swiper-slide {
+        background-size: cover;
+        background-position: center;
+      }
+
+      .mySwiper2 {
+        height: 300px;
+        width: 600px;
+      }
+
+      .mySwiper {
+        height: 20%;
+        box-sizing: border-box;
+        padding: 10px 0;
+      }
+
+      .mySwiper .swiper-slide {
+        width: 25%;
+        height: 100%;
+        opacity: 0.4;
+      }
+
+      .mySwiper .swiper-slide-thumb-active {
+        opacity: 1;
+      }
+
+      .swiper-slide img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    a{
+        position: absolute;
+        color: aqua;
+        left: 0;
+        bottom: 0;
+        text-decoration: none;
+        cursor: pointer;
+        z-index: 999;
+    }
+    #List{
+        width: 100%;
+        position: relative;
+    }
+    #box-List{
+        width: 100%;
+        height: 400px;
+        background-color: rgb(43, 43, 43);
+    }
+    #chakan{
+        margin-left:45%;
+        display: inline-block;
+        width: 100px;
+        font-size: 22px;
+        height: 25px;
+        cursor: pointer;
+    }
+    #xiazhai{
+        display: inline-block;
+        width: 100px;
+        font-size: 22px;
+        height: 25px;
+        cursor: pointer;
+    }
+    #xiangxi{
+        width: 400px;
+        height: 250px;
+        background-color: rgb(51, 51, 51);
+        position: absolute;
+        right: 10px;
+        top: 20px;
+    }
+    #xiangxi div{
+        position: absolute;
+        display: none;
+    }
+    #xiangxi div:nth-child(1){
+        display: block;
+    }
+    </style>
+  </head>
+
+  <body>
+    <!-- Swiper -->
+    <div id="boss">
+<div id="box-List">
+       <div id="List">
+        <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper2">
+      <div class="swiper-wrapper">
+         
+        <div class="swiper-slide"> 
+          <img src="001.jpg" />
+        </div>
+        <div class="swiper-slide">
+          <img src="002.jpg" />
+        </div>
+        <div class="swiper-slide">
+          <img src="003.jpg" />
+        </div>
+        <div class="swiper-slide">
+          <img src="004.jpg" />
+        </div>
+        <div class="swiper-slide">
+          <img src="005.jpg" />
+        </div>
+        <div class="swiper-slide">
+          <img src="006.jpg" />
+        </div>
+      </div>
+      
+    </div>
+    <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+      <div id="chakan">查看图片</div>
+      <div id="xiazhai">下载图片</div>
+    </div>
+    </div>
+    
+    <div id="box">
+     <div thumbsSlider="" class="swiper mySwiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <img src="001.jpg" />
+        </div>
+
+        <div class="swiper-slide">
+          <img src="002.jpg" />
+        </div>
+        <div class="swiper-slide">
+          <img src="003.jpg" />
+        </div>
+        <div class="swiper-slide">
+          <img src="004.jpg" />
+        </div>
+        <div class="swiper-slide">
+          <img src="005.jpg" />
+        </div>
+        <div class="swiper-slide">
+          <img src="006.jpg" />
+        </div>
+      </div>
+    </div>
+    </div>
+    
+    </div>
+    
+
+    <!-- Swiper JS -->
+    <script src="swiper-bundle.min.js"></script>
+    <script src="jquery.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+      var swiper = new Swiper(".mySwiper", {
+        spaceBetween: 10,
+        slidesPerView: 4,
+        freeMode: true,
+        watchSlidesProgress: true,
+      });
+      var swiper2 = new Swiper(".mySwiper2", {
+        spaceBetween: 10,
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+          disabledClass: 'my-button-disabled',
+        },
+        thumbs: {
+          swiper: swiper,
+        },
+        
+      });
+    //   console.log(swiper2.imagesToLoad);
+    //   let str = swiper2.imagesToLoad
+    //   for (let i = 0; i < str.length; i++) {
+    //     console.log(str[i].src);
+    //     if (str[i].src=='001.jpg') {
+    //         $('.swiper-button-prev').css('display', 'none');
+    //     }
+    //   }
+    $('#chakan').click(function(){
+        var currentSlide = swiper2.activeIndex + 1;
+        //  window.location.href = "http://127.0.0.1:5500/00" + currentSlide + ".jpg";
+         window.open("http://127.0.0.1:5500/00" + currentSlide + ".jpg") 
+    })
+    $('#xiazhai').click(function(){
+        var strList = $('.swiper-slide-active img').attr('src');
+        var link = document.createElement("a");
+        link.download = strList.substring(strList.lastIndexOf('/')+1);
+        link.href = strList;
+        link.click();
+    })
+    </script>
+    <style>
+        .my-button-disabled{
+         opacity:0 !important;
+    }
+    </style>
+  </body>
+</html>
